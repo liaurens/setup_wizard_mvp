@@ -1,0 +1,90 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║  PROJECT STRUCTURE WITH DATA CLASSES                              ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+setup_wizard_mvp/
+│
+├── 📄 main.py                      # Entry point - orchestrates everything
+├── 📄 config.py                    # Constants and settings
+│
+├── 📁 modules/                     # Main application modules
+│   ├── 📄 __init__.py             # Exports all public functions + ToolConfig
+│   │
+│   ├── 📄 user_input.py           # Collects input → Returns ToolConfig
+│   ├── 📄 validator.py            # Validates → Accepts ToolConfig
+│   ├── 📄 template_engine.py      # Processes templates → Accepts ToolConfig
+│   │
+│   └── 📁 models/                 # ⭐ NEW: Data models directory
+│       ├── 📄 __init__.py         #    Exports: ToolConfig
+│       └── 📄 tool_config.py      #    ⭐ THE DATA CLASS ⭐
+│
+├── 📁 templates/                   # MATLAB template files
+│   └── 📄 readme.txt
+│
+└── 📁 tests/                       # (Optional) Unit tests
+    ├── 📄 __init__.py
+    └── 📄 test_tool_config.py     # Tests for ToolConfig
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║  THE KEY FILE: modules/models/tool_config.py                      ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+from dataclasses import dataclass, field
+from typing import List
+
+@dataclass
+class ToolConfig:
+    """All tool configuration in one clean object"""
+    
+    # Required
+    matlab_name: str
+    create_tool: str
+    
+    # Optional with defaults
+    description: str = ""
+    input_type: str = "file_path"
+    output_type: str = "data_structure"
+    category: str = "general"
+    
+    # Internal
+    errors: List[str] = field(default_factory=list, init=False)
+    
+    def validate(self) -> bool:
+        """Validate configuration"""
+        # validation logic
+        pass
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║  DATA FLOW                                                        ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+    main.py
+       ↓
+   user_input.py
+       ↓
+   Returns ToolConfig ━━━━━┓
+       ↓                   ║ (Single object passed everywhere)
+   validator.py            ║
+       ↓                   ║
+   Validates ToolConfig ━━━┛
+       ↓
+   template_engine.py
+       ↓
+   Processes ToolConfig ━━━┛
+       ↓
+   Generated Output
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║  QUICK SETUP COMMANDS                                             ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+mkdir -p modules/models
+touch modules/models/__init__.py
+touch modules/models/tool_config.py
+
+# Then copy the ToolConfig code into tool_config.py
+# See IMPLEMENTATION_STEPS.md for complete code
+
