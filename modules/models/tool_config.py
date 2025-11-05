@@ -21,8 +21,6 @@ class ToolConfig:
             self.errors.append("empty string")
         return len(self.errors) == 0
 
-    def should_create(self):
-        return self.create_tool.upper() == "Y"
 
     def get_summary(self):
         return f"MATLAB Name: {self.matlab_name}\n" \

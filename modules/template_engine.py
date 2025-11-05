@@ -1,14 +1,12 @@
 import os
 
-def setup_template(matlab_name, valid_input):
-    if not valid_input:
-        print("cant continue invalid input")
-        return
+def setup_template(config):
 
-    print(f"Setting up {matlab_name}")
+
+    print(f"Setting up {config.matlab_name}")
     template_path = os.path.join('templates', 'readme.txt')
     with open(template_path, 'r') as file:
         template = file.read()
 
-    completed_template = template.replace("MATLAB_NAME", matlab_name)
+    completed_template = template.replace("MATLAB_NAME", config.matlab_name)
     return completed_template

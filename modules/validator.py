@@ -1,11 +1,13 @@
-def validate_input(create_tool, matlab_name):
-    if create_tool.upper() not in ["Y", "N"]:
-        return False, "No Y/N"
+def validate_input(config):
+    is_valid = config.validate()
 
-    if not matlab_name.replace(" ", "").isalpha():
-        return False, "only letters allowed"
+    if len(config.matlab_name)==2:
+        config.errors.append("too short")
+        is_valid = False
 
-    if not matlab_name.strip():
-        return False, "empty string"
+    if is_valid:
+        return True, "valid input"
+    else:
+        error_message = ": ".join(config.errors)
+        return False, error_message
 
-    return True, "Valid input"

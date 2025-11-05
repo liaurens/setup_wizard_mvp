@@ -5,10 +5,14 @@ def intro():
 
 def main():
     intro()
-    create_tool, matlab_name = modules.get_user_input()
-    valid_input, message = modules.validate_input(create_tool, matlab_name)
+    tool_info = modules.get_user_input()
+    is_valid, message = modules.validate_input(tool_info)
+    if not is_valid:
+        print(message)
+        return
+
     print(message)
-    created_template = modules.setup_template(matlab_name, valid_input)
+    created_template = modules.setup_template(tool_info)
     print(created_template)
 if __name__ == "__main__":
     main()
