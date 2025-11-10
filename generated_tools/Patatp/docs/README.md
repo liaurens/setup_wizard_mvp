@@ -1,15 +1,15 @@
-# alfabe
+# Patatp
 
 A MATLAB tool created with the Setup Wizard.
 
 ## Description
 
-Description of alfabe tool.
+Description of Patatp tool.
 
 ## Usage
 
 ```matlab
-alfabe()
+Patatp()
 ```
 
 ## Author
