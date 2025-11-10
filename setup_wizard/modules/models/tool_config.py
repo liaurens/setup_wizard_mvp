@@ -8,8 +8,10 @@ class ToolConfig:
 
     description: str = ""
     input_type: str = ""
+    input_file: str = ""
     output_type: str = ""
     category: str = ""
+    output_path: str = ""
 
     errors: List[str] = field(default_factory=list, init=False)
 

@@ -1,4 +1,4 @@
-import modules
+from setup_wizard import modules
 
 def intro():
     print("Welcome to the setup wizard!")
@@ -12,8 +12,8 @@ def main():
         return
 
     print(message)
-    created_template = modules.setup_template(tool_info)
-    print(created_template)
+    result = modules.generate_files(tool_info)
+    print(result)
 if __name__ == "__main__":
     main()
 
